@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="E2EProjectSuite">
+    <listeners><listener class-name="Academy.Listeners"/></listeners>
+    <test name="Verify home page links">
+        <classes>
+            <class name="Hompagesalllinks" />
+        </classes>
+    </test>
+    <test name="All image">
+        <classes>
+            <class name="Allimages"></class>
+        </classes>
+    </test>
+    <test name="All video">
+        <classes>
+            <class name="Allvideo"></class>
+        </classes>
+    </test>
+
+    </suite>
