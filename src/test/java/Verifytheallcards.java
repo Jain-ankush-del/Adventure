@@ -4,8 +4,11 @@ import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -53,6 +56,20 @@ public class Verifytheallcards extends base {
             System.out.println("Cards are matched");
         }else {
             System.out.println("Expected 15 cards, but found"  + actual.size());
+        }
+
+        Thread.sleep(3000);
+        Actions action = new Actions(driver);
+        la.Clickonsearchicon().click();
+        la.Clickonsearchfield().click();
+        la.Clickonsearchfield().sendKeys("test");
+        action.sendKeys(Keys.ENTER).perform();
+        String actualurl = driver.getCurrentUrl();
+        if(actualurl.equals("https://weisetech.dev/adventuregamers/?s=test")) {
+            System.out.println("Url is matched");
+        }else
+        {
+            System.out.println("Url is not matched" +actualurl);
         }
 
 

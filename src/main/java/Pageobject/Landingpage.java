@@ -14,10 +14,21 @@ By image = By.tagName("img");
 By videolink = By.cssSelector(".lazyload");
 By LAGR = By.cssSelector(".newrelease_box");
 By latestscreenshot = By.cssSelector(".reader_box.styled-reader-box");
+By searchicon =  By.cssSelector("div span[class*='icon-ag-search']");
+By searchfield = By.cssSelector("input[class='text search-input']");
 
 
     public Landingpage(WebDriver driver) {
         this.driver= driver;
+    }
+
+    public WebElement Clickonsearchicon() {
+        return this.driver.findElement(searchicon);
+
+    }
+    public WebElement Clickonsearchfield() {
+        return this.driver.findElement(searchfield);
+
     }
 
 
