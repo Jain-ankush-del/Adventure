@@ -51,6 +51,12 @@ public class Reviewpage extends base {
 
         pp.getreviewmenu().click();
 
+        long endTime = System.currentTimeMillis();
+        long startTime = 0;
+        long loadTime = endTime - startTime;
+
+        
+        System.out.println("Page load time: " + loadTime + " s");
         //
 
         Thread.sleep(2000);

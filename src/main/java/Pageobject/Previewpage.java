@@ -18,6 +18,7 @@ public class Previewpage {
 
 
 
+
     public Previewpage(WebDriver driver) {
         this.driver = driver;
     }
@@ -41,4 +42,6 @@ public class Previewpage {
         return this.driver.findElements(Gametitle);
 
     }
+
+
 }

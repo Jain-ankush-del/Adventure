@@ -3,32 +3,40 @@
 
 <suite name="E2EProjectSuite">
     <listeners><listener class-name="Academy.Listeners"/></listeners>
-    <test name="Verify home page links">
+    <test name="Discover page">
+        <classes>
+            <class name="Discoverpage" />
+        </classes>
+    </test>
+
+    <test name="Home all image">
+        <classes>
+            <class name="Allimages" />
+        </classes>
+    </test>
+    <test name="Home all Video">
+        <classes>
+            <class name="Allvideo" />
+        </classes>
+    </test>
+
+    <test name="Review page">
+        <classes>
+            <class name="Reviewpage" />
+        </classes>
+    </test>
+
+    <test name="Verify the all cards">
+        <classes>
+            <class name="Verifytheallcards" />
+        </classes>
+    </test>
+
+    <test name="Verify all links on home page">
         <classes>
             <class name="Hompagesalllinks" />
         </classes>
     </test>
-    <test name="All image">
-        <classes>
-            <class name="Allimages"></class>
-        </classes>
-    </test>
-    <test name="All video">
-        <classes>
-            <class name="Allvideo"></class>
-        </classes>
-    </test>
 
-    <test name="verify the all cards">
-        <classes>
-            <class name="Verifytheallcards"></class>
-        </classes>
-    </test>
-
-    <test name="Verify the Review page">
-        <classes>
-            <class name="Reviewpage"></class>
-        </classes>
-    </test>
 
     </suite>
