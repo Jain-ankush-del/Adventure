@@ -37,6 +37,29 @@
             <class name="Hompagesalllinks" />
         </classes>
     </test>
-
-
+    <test name="Verify all links on Deal page">
+        <classes>
+            <class name="DeaalTest" />
+        </classes>
+    </test>
+    <test name="Verify all links on mac page">
+        <classes>
+            <class name="MacTest" />
+        </classes>
+    </test>
+    <test name="Verify all links on pc page">
+        <classes>
+            <class name="pctest" />
+        </classes>
+    </test>
+    <test name="Verify all links on Top games page">
+        <classes>
+            <class name="Topgamespage" />
+        </classes>
+    </test>
+    <test name="Verify all links on Walk through page">
+        <classes>
+            <class name="Walkthroughspages" />
+        </classes>
+    </test>
     </suite>
