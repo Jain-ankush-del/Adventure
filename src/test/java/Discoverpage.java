@@ -4,10 +4,12 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -46,10 +48,22 @@ public class Discoverpage extends base {
         Actions actions = new Actions(driver);
         Thread.sleep(3000);
         WebElement dropdown = ds.getdropdown();
+        log.info("Hover on dropdown menu");
         Thread.sleep(3000);
         actions.moveToElement(dropdown).perform();
         Thread.sleep(5000);
+        long startTime = System.currentTimeMillis();
+
         ds.getdiscoveradvanture().click();
+
+        long endTime = System.currentTimeMillis();
+
+        long loadTime = endTime - startTime;
+
+        System.out.println("Page loaded in: " + loadTime + " ms");
+        System.out.println("Page loaded in: " + (loadTime / 1000.0) + " seconds");
+        Thread.sleep(3000);
+        Thread.sleep(3000);
         Thread.sleep(5000);
         WebElement dropdownelement =  ds.getgenerdropdown();
         Select dropdown1 = new Select(dropdownelement);
@@ -101,6 +115,29 @@ public class Discoverpage extends base {
 
         test.log(Status.PASS, "Test is passed");
         //
+        }
+
+
+    }
+    @Test
+    public void verifyassertions() throws InterruptedException {
+
+        Assert.assertEquals(driver.getTitle(), "Discover Adventure Games");
+        Thread.sleep(2000);
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("/discover"));
+        Thread.sleep(2000);
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("header")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.className("footersect")).isDisplayed());
+        Thread.sleep(2000);
+
+
+
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+        for (WebElement link : links) {
+            String href = link.getAttribute("href");
+
         }
     }
     @AfterTest

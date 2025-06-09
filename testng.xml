@@ -5,61 +5,9 @@
     <listeners><listener class-name="Academy.Listeners"/></listeners>
     <test name="Discover page">
         <classes>
-            <class name="Discoverpage" />
+            <class name="Aggiawardspage" />
         </classes>
     </test>
 
-    <test name="Home all image">
-        <classes>
-            <class name="Allimages" />
-        </classes>
-    </test>
-    <test name="Home all Video">
-        <classes>
-            <class name="Allvideo" />
-        </classes>
-    </test>
 
-    <test name="Review page">
-        <classes>
-            <class name="Reviewpage" />
-        </classes>
-    </test>
-
-    <test name="Verify the all cards">
-        <classes>
-            <class name="Verifytheallcards" />
-        </classes>
-    </test>
-
-    <test name="Verify all links on home page">
-        <classes>
-            <class name="Hompagesalllinks" />
-        </classes>
-    </test>
-    <test name="Verify all links on Deal page">
-        <classes>
-            <class name="DeaalTest" />
-        </classes>
-    </test>
-    <test name="Verify all links on mac page">
-        <classes>
-            <class name="MacTest" />
-        </classes>
-    </test>
-    <test name="Verify all links on pc page">
-        <classes>
-            <class name="pctest" />
-        </classes>
-    </test>
-    <test name="Verify all links on Top games page">
-        <classes>
-            <class name="Topgamespage" />
-        </classes>
-    </test>
-    <test name="Verify all links on Walk through page">
-        <classes>
-            <class name="Walkthroughspages" />
-        </classes>
-    </test>
     </suite>

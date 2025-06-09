@@ -4,12 +4,14 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import resources.ExtentReporterNG;
@@ -48,19 +50,21 @@ public class Reviewpage extends base {
         Thread.sleep(3000);
         actions.moveToElement(dropdown).perform();
         Thread.sleep(5000);
+        long startTime = System.currentTimeMillis();
 
         pp.getreviewmenu().click();
 
         long endTime = System.currentTimeMillis();
-        long startTime = 0;
+
         long loadTime = endTime - startTime;
 
-        
-        System.out.println("Page load time: " + loadTime + " s");
+        System.out.println("Page loaded in: " + loadTime + " ms");
+        System.out.println("Page loaded in: " + (loadTime / 1000.0) + " seconds");
+        Thread.sleep(3000);
         //
 
         Thread.sleep(2000);
-
+/*
         List<WebElement> tabs = pp.getarticelcategory();
         System.out.println("Total tabs: " + tabs.size());
 
@@ -122,8 +126,40 @@ public class Reviewpage extends base {
             Thread.sleep(2000);
         }
 
+*/
+    }
+
+    @Test
+    public void verifyassertions() throws InterruptedException {
+
+        Assert.assertEquals(driver.getTitle(), "Adventure game review | Adventure Gamers");
+        Thread.sleep(2000);
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("article-type/reviews"));
+        Thread.sleep(2000);
+
+        Assert.assertTrue(driver.findElement(By.className("header")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.className("footersect")).isDisplayed());
+        Thread.sleep(2000);
+
+
+
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+        for (WebElement link : links) {
+            String href = link.getAttribute("href");
+
+
+        }
 
     }
 
 
-}
+    @AfterTest
+    public void teardown() {
+        driver.close();
+        log.info("driver is close");
+        extent.flush();
+
+    }
+
+    }

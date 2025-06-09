@@ -4,8 +4,11 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import resources.ExtentReporterNG;
@@ -44,9 +47,19 @@ public class MacTest extends base {
 
         Macpage mp = new Macpage(driver);
         Thread.sleep(3000);
+        long startTime = System.currentTimeMillis();
+
         mp.getmacpage().click();
         Thread.sleep(3000);
-        List<WebElement> links = mp.getAllLinks();
+
+        long endTime = System.currentTimeMillis();
+
+        long loadTime = endTime - startTime;
+
+        System.out.println("Page loaded in: " + loadTime + " ms");
+        System.out.println("Page loaded in: " + (loadTime / 1000.0) + " seconds");
+        Thread.sleep(3000);
+      List<WebElement> links = mp.getAllLinks();
 
         int totalLinks = 0;
         int validLinks = 0;
@@ -54,7 +67,7 @@ public class MacTest extends base {
         int exceptionLinks = 0;
 
         System.out.println("============================================================");
-        System.out.println("---- All Links on Deals Page ----");
+        System.out.println("---- All Links on Mac Page ----");
         System.out.println("============================================================");
 
         for (WebElement link : links) {
@@ -77,19 +90,9 @@ public class MacTest extends base {
         }
 
         System.out.println("Total Valid Links Found: " + validLinks);
-        log.info("Total Valid Links Found: " + validLinks);
         System.out.println("Total Broken Links Found: " + brokenLinks);
-        log.info("Total Broken Links Found: " + brokenLinks);
         System.out.println(" Total Links with Exceptions: " + exceptionLinks);
-        log.info("Total Links with Exceptions: " + exceptionLinks);
         System.out.println("Total Links Processed: " + totalLinks);
-        log.info("Total Links Processed: " + totalLinks);
-        log.info("============================================================");
-        log.info(separator);
-        test.info("Total Valid Links Found: " + validLinks);
-        test.info(" Total Broken Links Found: " + brokenLinks);
-        test.info(" Total Links with Exceptions: " + exceptionLinks);
-        test.info(" Total Links Processed: " + totalLinks);
         System.out.println("============================================================");
     }
 
@@ -109,6 +112,36 @@ public class MacTest extends base {
             System.out.println("Exception for Link: " + linkUrl + " - " + e.getMessage());
             return -1;
         }
+
+    }
+
+    @Test
+    public void verifyassertions() throws InterruptedException {
+
+        Assert.assertEquals(driver.getTitle(), "Latest adventure games coverage for MacOS | Adventure Gamers");
+        Thread.sleep(2000);
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("categories/mac"));
+        Thread.sleep(2000);
+
+        Assert.assertTrue(driver.findElement(By.className("mega-menu-wrap")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.id("menu-footer-menu")).isDisplayed());
+        Thread.sleep(2000);
+
+
+
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+        for (WebElement link : links) {
+            String href = link.getAttribute("href");
+
+        }
+    }
+
+    @AfterTest
+    public void teardown() {
+        driver.close();
+        log.info("driver is close");
+
 
     }
 }

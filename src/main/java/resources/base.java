@@ -1,5 +1,6 @@
 package resources;
 
+import com.aventstack.extentreports.ExtentReports;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -8,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +21,7 @@ import java.util.Properties;
 public class base {
     public WebDriver driver;
     public Properties prop;
+    public ExtentReports extent;
     public WebDriver inilizationdriver() throws IOException {
 
         prop = new Properties();
@@ -64,5 +68,7 @@ public class base {
 
 
     }
+
+
 
 }

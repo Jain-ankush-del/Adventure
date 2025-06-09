@@ -1,5 +1,5 @@
-import Pageobject.Dealspage;
-import Pageobject.Topgames;
+import Pageobject.Aggiawards;
+import Pageobject.Recurringarticel;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,11 +18,10 @@ import resources.base;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
-import static java.io.File.separator;
-
-public class Topgamespage extends base {
+public class Recurringarticelpage  extends base {
     public WebDriver driver;
     ExtentReports extent = ExtentReporterNG.getReportObject();
     ExtentTest test;
@@ -37,18 +37,23 @@ public class Topgamespage extends base {
 
         Thread.sleep(2000);
         extent.createTest("Browser is open");
-
-
     }
 
     @Test
-    public void verifyAllLinksOnDealsPage() throws InterruptedException {
+    public void recurring() throws InterruptedException {
 
-        Topgames tg = new Topgames(driver);
+
+        Recurringarticel rc = new Recurringarticel(driver);
+        Actions actions = new Actions(driver);
         Thread.sleep(3000);
+        WebElement dropdown = rc.getdropdown();
+        log.info("Hover on dropdown menu");
+        Thread.sleep(3000);
+        actions.moveToElement(dropdown).perform();
+        Thread.sleep(5000);
         long startTime = System.currentTimeMillis();
-        tg.topdeals.click();
-        Thread.sleep(3000);
+        rc.getrecurringarticel().click();
+        Thread.sleep(5000);
 
         long endTime = System.currentTimeMillis();
 
@@ -57,15 +62,20 @@ public class Topgamespage extends base {
         System.out.println("Page loaded in: " + loadTime + " ms");
         System.out.println("Page loaded in: " + (loadTime / 1000.0) + " seconds");
         Thread.sleep(3000);
-        List<WebElement> links = tg.getAllLinks();
 
+        List<WebElement> links = rc.getalllinks();
+        System.out.println(links.size());
+
+
+
+        Thread.sleep(3000);
         int totalLinks = 0;
         int validLinks = 0;
         int brokenLinks = 0;
         int exceptionLinks = 0;
 
         System.out.println("============================================================");
-        System.out.println("---- All Links on Top games Page ----");
+        System.out.println("---- All Links on Recurringarticel Page ----");
         System.out.println("============================================================");
 
         for (WebElement link : links) {
@@ -85,22 +95,14 @@ public class Topgamespage extends base {
                 }
                 System.out.println("============================================================");
             }
+
+
         }
 
         System.out.println("Total Valid Links Found: " + validLinks);
-        log.info("Total Valid Links Found: " + validLinks);
         System.out.println("Total Broken Links Found: " + brokenLinks);
-        log.info("Total Broken Links Found: " + brokenLinks);
         System.out.println(" Total Links with Exceptions: " + exceptionLinks);
-        log.info("Total Links with Exceptions: " + exceptionLinks);
         System.out.println("Total Links Processed: " + totalLinks);
-        log.info("Total Links Processed: " + totalLinks);
-        log.info("============================================================");
-        log.info(separator);
-        test.info("Total Valid Links Found: " + validLinks);
-        test.info(" Total Broken Links Found: " + brokenLinks);
-        test.info(" Total Links with Exceptions: " + exceptionLinks);
-        test.info(" Total Links Processed: " + totalLinks);
         System.out.println("============================================================");
     }
 
@@ -120,19 +122,23 @@ public class Topgamespage extends base {
             System.out.println("Exception for Link: " + linkUrl + " - " + e.getMessage());
             return -1;
         }
+
+
+
     }
     @Test
     public void verifyassertions() throws InterruptedException {
 
-        Assert.assertEquals(driver.getTitle(), "Best Adventure Games | Adventure Gamers");
+        Assert.assertEquals(driver.getTitle(), "Overview of recurring articles on Adventure Games | Adventure Gamers");
         Thread.sleep(2000);
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("/topgames"));
+        Assert.assertTrue(driver.getCurrentUrl().contains("/recurring-articles"));
         Thread.sleep(2000);
 
         Assert.assertTrue(driver.findElement(By.className("header")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.className("footersect")).isDisplayed());
         Thread.sleep(2000);
+
 
 
         List<WebElement> links = driver.findElements(By.tagName("a"));
@@ -144,11 +150,15 @@ public class Topgamespage extends base {
 
     }
 
-        @AfterTest
+
+
+
+    @AfterTest
     public void teardown() {
         driver.close();
         log.info("driver is close");
-
+        extent.flush();
 
     }
+
 }
